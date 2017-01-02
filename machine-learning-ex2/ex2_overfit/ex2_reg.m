@@ -55,10 +55,9 @@ X = data(:, [1, 2]); y = data(:, 3);
 %
 
 OrigX = X;;
-for d = 100:200
+for d = 6:19
     d
     X = mapFeature(OrigX(:,1), OrigX(:,2), d);
-    size(X)
 
     % Initialize fitting parameters
     initial_theta = zeros(size(X, 2), 1);
@@ -67,12 +66,12 @@ for d = 100:200
     lambda = 0;
 
     % Set Options
-    options = optimset('GradObj', 'on', 'MaxIter', 1000 * d);
+    options = optimset('GradObj', 'on', 'TolFun', 1e-1000, 'TolX', 1e-1000, 'MaxIter', 1000000, 'MaxFunEvals', 1000000);
 
     % Optimize
     [theta, J, exit_flag] = ...
         fminunc(@(t)(costFunctionReg(t, X, y, lambda)), initial_theta, options);
-    J
+    exit_flag
 
     % Plot Boundary
     plotDecisionBoundary(theta, X, y, d);
