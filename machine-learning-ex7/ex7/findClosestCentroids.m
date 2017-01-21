@@ -21,11 +21,21 @@ idx = zeros(size(X,1), 1);
 % Note: You can use a for-loop over the examples to compute this.
 %
 
-
-
-
-
-
+warning ("off", "Octave:broadcast");
+for i = 1:size(idx)
+    x = X(i,:);
+    d = centroids .- x;
+    min_r = 0;
+    c = 0;
+    for j = 1:size(d, 1)
+        r = d(j,:) * d(j,:)';
+        if r < min_r || j == 1
+            min_r = r;
+            c = j;
+        end
+    end
+    idx(i) = c;
+end
 
 % =============================================================
 
