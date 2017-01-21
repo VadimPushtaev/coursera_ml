@@ -142,6 +142,17 @@ load('ex6data3.mat');
 [C, sigma] = dataset3Params(X, y, Xval, yval);
 
 % Train the SVM
+
+% Try C and sigma
+%means = []
+%for C = [0.01, 0.03, 0.1, 0.3, 1, 3, 10, 30];
+%    for sigma = [0.01, 0.03, 0.1, 0.3, 1, 3, 10, 30];
+%        model= svmTrain(X, y, C, @(x1, x2) gaussianKernel(x1, x2, sigma));
+%        predictions = svmPredict(model, Xval);
+%        means = [means; C sigma mean(double(predictions ~= yval))]
+%    end
+%end
+
 model= svmTrain(X, y, C, @(x1, x2) gaussianKernel(x1, x2, sigma));
 visualizeBoundary(X, y, model);
 

@@ -48,7 +48,14 @@ x = zeros(n, 1);
 %
 %
 
-
+x = [];
+for word = 1:n
+    if find(eq(word_indices, word))
+        x = [x; 1];
+    else
+        x = [x; 0];
+    end
+end
 
 
 
